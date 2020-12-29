@@ -34,10 +34,6 @@
 #include "wasm-traversal.h"
 #include "wasm.h"
 
-#ifdef WASM_INTERPRETER_DEBUG
-#include "wasm-printing.h"
-#endif
-
 namespace wasm {
 
 struct WasmException {
@@ -211,6 +207,7 @@ public:
 
   Flow visitBlock(Block* curr) {
     NOTE_ENTER("Block");
+    NOTE_NAME(curr->name);
     // special-case Block, because Block nesting (in their first element) can be
     // incredibly deep
     std::vector<Block*> stack;
@@ -264,6 +261,7 @@ public:
   }
   Flow visitLoop(Loop* curr) {
     NOTE_ENTER("Loop");
+    NOTE_NAME(curr->name);
     Index loopCount = 0;
     while (1) {
       Flow flow = visit(curr->body);
@@ -2380,11 +2378,11 @@ private:
     Flow visitLocalSet(LocalSet* curr) {
       NOTE_ENTER("LocalSet");
       auto index = curr->index;
+      NOTE_EVAL1(index);
       Flow flow = this->visit(curr->value);
       if (flow.breaking()) {
         return flow;
       }
-      NOTE_EVAL1(index);
       NOTE_EVAL1(flow.getSingleValue());
       assert(curr->isTee() ? Type::isSubType(flow.getType(), curr->type)
                            : true);
