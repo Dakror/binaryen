@@ -12,9 +12,8 @@ Indenter::~Indenter() {
   --indentLevel;
 }
 void Indenter::print() {
-  std::cout << indentLevel << ':';
   for (int i = 0; i <= indentLevel; ++i) {
-    std::cout << ' ';
+    std::cout << "    ";
   }
 }
 #endif // WASM_INTERPRETER_DEBUG

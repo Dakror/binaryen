@@ -117,7 +117,7 @@ public:
   Indenter _int_blah(x);                                                       \
   {                                                                            \
     Indenter::print();                                                         \
-    std::cout << "visit " << x << " : " << curr << "\n";                       \
+    std::cout << "visit " << x << "\n";                                        \
   }
 #define NOTE_ENTER_(x)                                                         \
   Indenter _int_blah(x);                                                       \
@@ -2371,14 +2371,16 @@ private:
     Flow visitLocalGet(LocalGet* curr) {
       NOTE_ENTER("LocalGet");
       auto index = curr->index;
-      NOTE_EVAL1(index);
+      auto name = scope.function->localNames.at(index);
+      NOTE_NAME(name);
       NOTE_EVAL1(scope.locals[index]);
       return scope.locals[index];
     }
     Flow visitLocalSet(LocalSet* curr) {
       NOTE_ENTER("LocalSet");
       auto index = curr->index;
-      NOTE_EVAL1(index);
+      auto name = scope.function->localNames.at(index);
+      NOTE_NAME(name);
       Flow flow = this->visit(curr->value);
       if (flow.breaking()) {
         return flow;
@@ -2393,7 +2395,7 @@ private:
     Flow visitGlobalGet(GlobalGet* curr) {
       NOTE_ENTER("GlobalGet");
       auto name = curr->name;
-      NOTE_EVAL1(name);
+      NOTE_NAME(name);
       assert(instance.globals.find(name) != instance.globals.end());
       NOTE_EVAL1(instance.globals[name]);
       return instance.globals[name];
@@ -2405,7 +2407,7 @@ private:
       if (flow.breaking()) {
         return flow;
       }
-      NOTE_EVAL1(name);
+      NOTE_NAME(name);
       NOTE_EVAL1(flow.getSingleValue());
       instance.globals[name] = flow.values;
       return Flow();
