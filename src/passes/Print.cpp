@@ -1824,8 +1824,8 @@ struct PrintSExpression : public OverriddenVisitor<PrintSExpression> {
   const char* maybeSpace;
   const char* maybeNewLine;
 
-  bool full = false; // whether to not elide nodes in output when possible
-                     // (like implicit blocks) and to emit types
+  bool full = false;    // whether to not elide nodes in output when possible
+                        // (like implicit blocks) and to emit types
   bool stackIR = false; // whether to print stack IR if it is present
                         // (if false, and Stack IR is there, we just
                         // note it exists)
@@ -3141,7 +3141,7 @@ printStackIR(StackIR* ir, std::ostream& o, Function* func) {
   size_t indent = func ? 2 : 0;
   auto doIndent = [&indent, &o]() {
     for (size_t j = 0; j < indent; j++) {
-      o << ' ';
+      o << "    ";
     }
   };
   for (Index i = 0; i < (*ir).size(); i++) {
