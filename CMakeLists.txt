@@ -285,7 +285,7 @@ add_subdirectory(test/lit)
 # Object files
 set(binaryen_objs
     $<TARGET_OBJECTS:passes>
-    $<TARGET_OBJECTS:wasm>
+    $<TARGET_OBJECTS:binaryen_wasm>
     $<TARGET_OBJECTS:asmjs>
     $<TARGET_OBJECTS:emscripten-optimizer>
     $<TARGET_OBJECTS:ir>
