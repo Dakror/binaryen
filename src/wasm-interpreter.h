@@ -2371,16 +2371,14 @@ private:
     Flow visitLocalGet(LocalGet* curr) {
       NOTE_ENTER("LocalGet");
       auto index = curr->index;
-      auto name = scope.function->localNames.at(index);
-      NOTE_NAME(name);
+      NOTE_NAME(scope.function->localNames.at(index));
       NOTE_EVAL1(scope.locals[index]);
       return scope.locals[index];
     }
     Flow visitLocalSet(LocalSet* curr) {
       NOTE_ENTER("LocalSet");
       auto index = curr->index;
-      auto name = scope.function->localNames.at(index);
-      NOTE_NAME(name);
+      NOTE_NAME(scope.function->localNames.at(index));
       Flow flow = this->visit(curr->value);
       if (flow.breaking()) {
         return flow;
