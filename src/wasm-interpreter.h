@@ -583,19 +583,26 @@ public:
       case AddInt32:
       case AddInt64:
       case AddFloat32:
-      case AddFloat64:
+      case AddFloat64: {
+        NOTE_NAME("Add");
         return left.add(right);
+      }
       case SubInt32:
       case SubInt64:
       case SubFloat32:
-      case SubFloat64:
+      case SubFloat64: {
+        NOTE_NAME("Sub");
         return left.sub(right);
+      }
       case MulInt32:
       case MulInt64:
       case MulFloat32:
-      case MulFloat64:
+      case MulFloat64: {
+        NOTE_NAME("Mul");
         return left.mul(right);
+      }
       case DivSInt32: {
+        NOTE_NAME("DivS");
         if (right.getInteger() == 0) {
           trap("i32.div_s by 0");
         }
@@ -606,12 +613,14 @@ public:
         return left.divS(right);
       }
       case DivUInt32: {
+        NOTE_NAME("DivU");
         if (right.getInteger() == 0) {
           trap("i32.div_u by 0");
         }
         return left.divU(right);
       }
       case RemSInt32: {
+        NOTE_NAME("RemS");
         if (right.getInteger() == 0) {
           trap("i32.rem_s by 0");
         }
@@ -622,12 +631,14 @@ public:
         return left.remS(right);
       }
       case RemUInt32: {
+        NOTE_NAME("RemU");
         if (right.getInteger() == 0) {
           trap("i32.rem_u by 0");
         }
         return left.remU(right);
       }
       case DivSInt64: {
+        NOTE_NAME("DivS");
         if (right.getInteger() == 0) {
           trap("i64.div_s by 0");
         }
@@ -637,12 +648,14 @@ public:
         return left.divS(right);
       }
       case DivUInt64: {
+        NOTE_NAME("DivU");
         if (right.getInteger() == 0) {
           trap("i64.div_u by 0");
         }
         return left.divU(right);
       }
       case RemSInt64: {
+        NOTE_NAME("RemS");
         if (right.getInteger() == 0) {
           trap("i64.rem_s by 0");
         }
@@ -652,95 +665,147 @@ public:
         return left.remS(right);
       }
       case RemUInt64: {
+        NOTE_NAME("RemU");
         if (right.getInteger() == 0) {
           trap("i64.rem_u by 0");
         }
         return left.remU(right);
       }
       case DivFloat32:
-      case DivFloat64:
+      case DivFloat64: {
+        NOTE_NAME("Div");
         return left.div(right);
+      }
       case AndInt32:
-      case AndInt64:
+      case AndInt64: {
+        NOTE_NAME("And");
         return left.and_(right);
+      }
       case OrInt32:
-      case OrInt64:
+      case OrInt64: {
+        NOTE_NAME("Or");
         return left.or_(right);
+      }
       case XorInt32:
-      case XorInt64:
+      case XorInt64: {
+        NOTE_NAME("Xor");
         return left.xor_(right);
+      }
       case ShlInt32:
-      case ShlInt64:
+      case ShlInt64: {
+        NOTE_NAME("Shl");
         return left.shl(right);
+      }
       case ShrUInt32:
-      case ShrUInt64:
+      case ShrUInt64: {
+        NOTE_NAME("ShrU");
         return left.shrU(right);
+      }
       case ShrSInt32:
-      case ShrSInt64:
+      case ShrSInt64: {
+        NOTE_NAME("ShrS");
         return left.shrS(right);
+      }
       case RotLInt32:
-      case RotLInt64:
+      case RotLInt64: {
+        NOTE_NAME("RotL");
         return left.rotL(right);
+      }
       case RotRInt32:
-      case RotRInt64:
+      case RotRInt64: {
+        NOTE_NAME("RotR");
         return left.rotR(right);
+      }
 
       case EqInt32:
       case EqInt64:
       case EqFloat32:
-      case EqFloat64:
+      case EqFloat64: {
+        NOTE_NAME("Eq");
         return left.eq(right);
+      }
       case NeInt32:
       case NeInt64:
       case NeFloat32:
-      case NeFloat64:
+      case NeFloat64: {
+        NOTE_NAME("Ne");
         return left.ne(right);
+      }
       case LtSInt32:
-      case LtSInt64:
+      case LtSInt64: {
+        NOTE_NAME("LtS");
         return left.ltS(right);
+      }
       case LtUInt32:
-      case LtUInt64:
+      case LtUInt64: {
+        NOTE_NAME("LtU");
         return left.ltU(right);
+      }
       case LeSInt32:
-      case LeSInt64:
+      case LeSInt64: {
+        NOTE_NAME("LeS");
         return left.leS(right);
+      }
       case LeUInt32:
-      case LeUInt64:
+      case LeUInt64: {
+        NOTE_NAME("LeU");
         return left.leU(right);
+      }
       case GtSInt32:
-      case GtSInt64:
+      case GtSInt64: {
+        NOTE_NAME("GtS");
         return left.gtS(right);
+      }
       case GtUInt32:
-      case GtUInt64:
+      case GtUInt64: {
+        NOTE_NAME("GtU");
         return left.gtU(right);
+      }
       case GeSInt32:
-      case GeSInt64:
+      case GeSInt64: {
+        NOTE_NAME("GeS");
         return left.geS(right);
+      }
       case GeUInt32:
-      case GeUInt64:
+      case GeUInt64: {
+        NOTE_NAME("GeU");
         return left.geU(right);
+      }
       case LtFloat32:
-      case LtFloat64:
+      case LtFloat64: {
+        NOTE_NAME("Lt");
         return left.lt(right);
+      }
       case LeFloat32:
-      case LeFloat64:
+      case LeFloat64: {
+        NOTE_NAME("Le");
         return left.le(right);
+      }
       case GtFloat32:
-      case GtFloat64:
+      case GtFloat64: {
+        NOTE_NAME("Gt");
         return left.gt(right);
+      }
       case GeFloat32:
-      case GeFloat64:
+      case GeFloat64: {
+        NOTE_NAME("Ge");
         return left.ge(right);
-
+      }
       case CopySignFloat32:
-      case CopySignFloat64:
+      case CopySignFloat64: {
+        NOTE_NAME("CopySign");
         return left.copysign(right);
+      }
       case MinFloat32:
-      case MinFloat64:
+      case MinFloat64: {
+        NOTE_NAME("Min");
         return left.min(right);
+      }
       case MaxFloat32:
-      case MaxFloat64:
+      case MaxFloat64: {
+        NOTE_NAME("Max");
         return left.max(right);
+      }
 
       case EqVecI8x16:
         return left.eqI8x16(right);
