@@ -2436,18 +2436,20 @@ private:
     Flow visitLocalGet(LocalGet* curr) {
       NOTE_ENTER("LocalGet");
       auto index = curr->index;
-      if (scope.function->localNames.find(index) !=
-          scope.function->localNames.end())
-        NOTE_NAME(scope.function->localNames.at(index));
+      auto it = scope.function->localNames.find(index);
+      if (it != scope.function->localNames.end()) {
+        NOTE_NAME(*it);
+      }
       NOTE_EVAL1(scope.locals[index]);
       return scope.locals[index];
     }
     Flow visitLocalSet(LocalSet* curr) {
       NOTE_ENTER("LocalSet");
       auto index = curr->index;
-      if (scope.function->localNames.find(index) !=
-          scope.function->localNames.end())
-        NOTE_NAME(scope.function->localNames.at(index));
+      auto it = scope.function->localNames.find(index);
+      if (it != scope.function->localNames.end()) {
+        NOTE_NAME(*it);
+      }
       Flow flow = this->visit(curr->value);
       if (flow.breaking()) {
         return flow;
